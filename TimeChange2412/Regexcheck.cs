@@ -10,20 +10,23 @@ namespace TimeChange2412
     public class Regexcheck
     {
         
-        string pattern = @"^(20|21|22|23|[0-1]\d)\:[0-5]\d$";
-        string input;
+        string pa = @"^(20|21|22|23|[0-1]\d)\:[0-5]\d$";
+        string ip;
         int Iu;
         string[] clock;
         
         public void Timeset()
         {
 
-            clock = input.Split(':');
+            clock = ip.Split(':');
             Iu = Convert.ToInt32(clock[0]);
             switch (Iu)
             {
+                case 00:
+                    Console.WriteLine(Iu+":" + clock[1] + " a.m.");
+                    break;
                 case 12:
-                    Console.WriteLine(Iu+":" + clock[1] + " PM");
+                    Console.WriteLine(Iu+":" + clock[1] + " p.m.");
                     break;
                 case 13:                   
                 case 14:                   
@@ -36,29 +39,25 @@ namespace TimeChange2412
                 case 21:                  
                 case 22:                
                 case 23:
-                    Console.WriteLine(Iu-12+":" + clock[1] + " PM");
-                    break;
-                case 00:
-                    Console.WriteLine("00:" + clock[1] + " AM");
-                    break;
-
+                    Console.WriteLine(Iu-12+":" + clock[1] + " p.m.");
+                    break;                
                 default:
-                    Console.WriteLine(Iu + ":" + clock[1] + " AM");
+                    Console.WriteLine(Iu + ":" + clock[1] + " a.m.");
                     break;
             }
           
         }
         public void Change()
         {
-            input = Console.ReadLine();
-            Match match = Regex.Match(input, pattern);
+            ip = Console.ReadLine();
+            Match match = Regex.Match(ip, pa);
             if (match.Success)
             {
                 Timeset();
-            }
+            }        
             else
             {
-                Console.WriteLine("格式輸入錯誤，請重新輸入");
+                Console.WriteLine("輸入錯誤，請重新輸入");
                 Change();
             }
         }
