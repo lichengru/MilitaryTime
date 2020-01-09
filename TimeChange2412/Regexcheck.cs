@@ -9,56 +9,52 @@ namespace TimeChange2412
 {
     public class Regexcheck
     {
-        
+
         string pa = @"^(20|21|22|23|[0-1]\d)\:[0-5]\d$";
-        string ip;
-        int Iu;
+        string input;
+        int hour;
         string[] clock;
-        
-        public void Timeset()
+
+        public string Timeset()
         {
 
-            clock = ip.Split(':');
-            Iu = Convert.ToInt32(clock[0]);
-            switch (Iu)
+            clock = input.Split(':');
+            hour = Convert.ToInt32(clock[0]);
+            switch (hour)
             {
                 case 00:
-                    Console.WriteLine(Iu+":" + clock[1] + " a.m.");
-                    break;
+                    return  ("12:" + clock[1] + " a.m.");
                 case 12:
-                    Console.WriteLine(Iu+":" + clock[1] + " p.m.");
-                    break;
-                case 13:                   
-                case 14:                   
-                case 15:                  
-                case 16:               
-                case 17:            
-                case 18:                 
-                case 19:                 
-                case 20:                  
-                case 21:                  
-                case 22:                
+                    return (hour + ":" + clock[1] + " p.m.");
+                case 13:
+                case 14:
+                case 15:
+                case 16:
+                case 17:
+                case 18:
+                case 19:
+                case 20:
+                case 21:
+                case 22:
                 case 23:
-                    Console.WriteLine(Iu-12+":" + clock[1] + " p.m.");
-                    break;                
+                    return (hour - 12 + ":" + clock[1] + " p.m.");
                 default:
-                    Console.WriteLine(Iu + ":" + clock[1] + " a.m.");
-                    break;
+                    return (hour + ":" + clock[1] + " a.m.");
             }
-          
+
         }
-        public void Change()
+        public string MilitaryTimeToRegularTime()
         {
-            ip = Console.ReadLine();
-            Match match = Regex.Match(ip, pa);
+            input = Console.ReadLine();
+            Match match = Regex.Match(input, pa);
             if (match.Success)
             {
-                Timeset();
-            }        
+                return Timeset();
+            }
             else
             {
                 Console.WriteLine("輸入錯誤，請重新輸入");
-                Change();
+                return MilitaryTimeToRegularTime();
             }
         }
     }

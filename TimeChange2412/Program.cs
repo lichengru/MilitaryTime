@@ -13,7 +13,7 @@ namespace TimeChange2412
         {
             Regexcheck regex = new Regexcheck();
             Console.WriteLine("請輸入24小時制的時間(格式為00:00):");
-            regex.Change();           
+            Console.WriteLine(regex.MilitaryTimeToRegularTime());
             Console.ReadKey();
             
         }
